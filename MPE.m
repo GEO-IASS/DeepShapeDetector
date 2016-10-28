@@ -18,7 +18,7 @@ end
 mpe = 0;
 batchSize = size(labels, 4);
 for b = 1:batchSize
-    for i = 0:13
+    for i = 0:2
         mpe = mpe + sqrt(delta(1,1,2*i + 1,b)^2 + delta(1,1,2*i + 2,b)^2);
     end
 end

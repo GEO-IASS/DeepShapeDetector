@@ -43,7 +43,7 @@ net = add_block(net, id, 3, 3, 512, 512, 1, 1) ; id = id + 1;
 net = add_block(net, id, 3, 3, 512, 512, 1, 1) ; id = id + 1;
  
 %net.layers{end+1} = struct('type', 'dropout', 'name', sprintf('dropout%d', id), 'rate', 0.5) ; 
-net = add_block(net, id, 4, 4, 512, 2048, 1, 0) ; id = id + 1;
+net = add_block(net, id, 2, 2, 512, 2048, 1, 0) ; id = id + 1;
 net.layers{end+1} = struct('type', 'dropout', 'name', sprintf('dropout%d', id), 'rate', 0.5) ;
 net = add_block(net, id, 1, 1, 2048, 2048, 1, 0) ; id = id + 1;
 %net.layers(end) = [] ;

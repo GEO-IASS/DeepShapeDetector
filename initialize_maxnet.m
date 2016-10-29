@@ -6,23 +6,22 @@ net.layers = { } ;
 
 id = 0;
 
-net = add_block(net, id, 5, 5, 3, 32, 2, 2) ; id = id + 1;
+net = add_block(net, id, 5, 5, 3, 16, 2, 2) ; id = id + 1;
 net.layers{end+1} = struct('type', 'pool', 'name', sprintf('poogmal%d', id), ...
                            'method', 'max', ...
                            'pool', [2 2], ...
                            'stride', 2, ...
                            'pad', 0) ;
 
-net = add_block(net, id, 3, 3, 32, 64, 1, 1) ; id = id + 1;
+net = add_block(net, id, 3, 3, 16, 32, 1, 1) ; id = id + 1;
 net.layers{end+1} = struct('type', 'pool', 'name', sprintf('pool%d', id), ...
                            'method', 'max', ...
                            'pool', [2 2], ...
                            'stride', 2, ...
                            'pad', 0) ;
 
+net = add_block(net, id, 3, 3, 32, 64, 1, 1) ; id = id + 1;
 net = add_block(net, id, 3, 3, 64, 128, 1, 1) ; id = id + 1;
-net = add_block(net, id, 3, 3, 128, 128, 1, 1) ; id = id + 1;
-net = add_block(net, id, 3, 3, 128, 128, 1, 1) ; id = id + 1;
 net.layers{end+1} = struct('type', 'pool', 'name', sprintf('pool%d', id), ...
                            'method', 'max', ...
                            'pool', [2 2], ...
@@ -31,25 +30,20 @@ net.layers{end+1} = struct('type', 'pool', 'name', sprintf('pool%d', id), ...
                                             
 net = add_block(net, id, 3, 3, 128, 256, 1, 1) ; id = id + 1;
 net = add_block(net, id, 3, 3, 256, 256, 1, 1) ; id = id + 1;
-net = add_block(net, id, 3, 3, 256, 256, 1, 1) ; id = id + 1;
 net.layers{end+1} = struct('type', 'pool', 'name', sprintf('pool%d', id), ...
                            'method', 'max', ...
                            'pool', [2 2], ...
                            'stride', 2, ...
                            'pad', 0) ;
                        
-net = add_block(net, id, 3, 3, 256, 512, 1, 1) ; id = id + 1;
-net = add_block(net, id, 3, 3, 512, 512, 1, 1) ; id = id + 1;
-net = add_block(net, id, 3, 3, 512, 512, 1, 1) ; id = id + 1;
- 
 %net.layers{end+1} = struct('type', 'dropout', 'name', sprintf('dropout%d', id), 'rate', 0.5) ; 
-net = add_block(net, id, 2, 2, 512, 2048, 1, 0) ; id = id + 1;
+net = add_block(net, id, 2, 2, 256, 512, 1, 0) ; id = id + 1;
 net.layers{end+1} = struct('type', 'dropout', 'name', sprintf('dropout%d', id), 'rate', 0.5) ;
-net = add_block(net, id, 1, 1, 2048, 2048, 1, 0) ; id = id + 1;
+net = add_block(net, id, 1, 1, 512, 512, 1, 0) ; id = id + 1;
 %net.layers(end) = [] ;
 %net.layers{end+1} = struct('type', 'sigmoid', 'name', sprintf('sigmoid%d',id)) ;
 net.layers{end+1} = struct('type', 'dropout', 'name', sprintf('dropout%d', id), 'rate', 0.5) ; 
-net = add_block(net, id, 1, 1, 2048, 6, 1, 0) ;
+net = add_block(net, id, 1, 1, 512, 6, 1, 0) ;
 %net.layers(end) = [] ;
 net.layers(end) = [] ;
 net.layers{end+1} = struct('type', 'sigmoid', 'name', sprintf('sigmoid%d',id)) ;

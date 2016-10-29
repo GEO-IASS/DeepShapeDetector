@@ -19,5 +19,9 @@ for b = 1:batch_size
     loss = MPE(opts, label, res);
     display(sprintf('Image index %d: MPE is %f', batch(b), loss));
 
-    waitforbuttonpress;
+    w = 0;
+    while w ~= 1
+        w = waitforbuttonpress;
+    end
+    
 end

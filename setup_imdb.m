@@ -7,8 +7,8 @@ imdb.classes.name{3} = 'Vertix';
 
 % Loading training, validing and testing image
 train_size = 10000;
-val_size = 1000;
-test_size = 1000;
+val_size = 100;
+test_size = 100;
 train_path = 'data/training/';
 val_path = 'data/validation/';
 test_path = 'data/testing/';

@@ -28,9 +28,22 @@ for i = 1:num_sample
     pos_circle = [pos_triangle(1), pos_triangle(2), radius];
     image = insertShape(image,'FilledCircle', pos_circle,'Color', randi(128, 1, 3),'Opacity', opacity);
     
-    radius = floor(sqrt(min_area)/3);
-    pos_circle = [pos_triangle(3), pos_triangle(4), radius];
-    image = insertShape(image,'Circle', pos_circle,'Color', randi(128, 1, 3),'Opacity', opacity);
+    %radius = floor(sqrt(min_area)/3);
+    %pos_circle = [pos_triangle(3), pos_triangle(4), radius];
+    %image = insertShape(image,'Circle', pos_circle,'Color', randi(128, 1, 3),'Opacity', opacity);
+    
+    center = ([pos_triangle(3), pos_triangle(4), 0] + [pos_triangle(5), pos_triangle(6), 0]) / 2;
+    v1_to_center = center - [pos_triangle(1), pos_triangle(2), 0];
+    v1_to_v2 = [pos_triangle(3), pos_triangle(4), 0] - [pos_triangle(1), pos_triangle(2), 0];
+    c = cross(v1_to_v2, v1_to_center);
+    if c(3) < 0
+        temp_x = pos_triangle(3);
+        temp_y = pos_triangle(4);
+        pos_triangle(3) = pos_triangle(5);
+        pos_triangle(4) = pos_triangle(6);
+        pos_triangle(5) = temp_x;
+        pos_triangle(6) = temp_y;
+    end
     
     % Save image and positions
     imwrite(image, [path, 'im', sprintf('%05d',i), '.jpg']);

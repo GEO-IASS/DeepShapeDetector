@@ -1,6 +1,6 @@
-function draw_pos(input_im, row)
-imshow(input_im);
-title('Press any keyboard button to pass next.');
+function draw_pos(input_im, row, title_str)
+imshow(input_im, 'InitialMagnification','fit');
+title(title_str)
 
 pos1 = [row(1, 1, 1), row(1, 1, 2)];
 pos2 = [row(1, 1, 3), row(1, 1, 4)];

@@ -13,6 +13,12 @@ for i = 1:num_sample
     sigma = rand(1,1) + 1;
     image = imgaussfilt(image, sigma);
     
+    % Draw background triangle & quadrilateral
+    %opacity = rand(1,1)/10 + 0.9;
+    %image = insertShape(image,'FilledPolygon', {randi(image_size, 1, 6)},'Color', randi(255, 1, 3),'Opacity', opacity);
+    %opacity = rand(1,1)/10 + 0.9;
+    %image = insertShape(image,'FilledPolygon', {randi(image_size, 1, 8)},'Color', randi(255, 1, 3),'Opacity', opacity);
+    
     % Draw triangle
     min_area = image_size * image_size * 0.05;
     area = 0;

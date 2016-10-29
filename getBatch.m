@@ -5,7 +5,6 @@ function [im, label] = getBatch(imdb, batch)
 %   BATCH.
 batch_size = numel(batch);
 im_name = imdb.images.name(:,batch);
-im_size = size(imread(im_name{1}), 1);
 im = single(zeros([size(imread(im_name{1})), batch_size]));
 label = single(zeros(size(imdb.images.labels, 1),  batch_size));
 for i = 1:batch_size

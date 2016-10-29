@@ -12,13 +12,13 @@ for b = 1:batch_size
         im(:,:,c) = im(:,:,c) - imdb.images.normalization.average(c);
     end
     res = vl_simplenn(net, im) ;
-    draw_pos(test_image, res(end).x*im_size);
-    
+
     label = single(imdb.images.labels(:, batch(b)));
     label = reshape(label, 1, 1, size(label, 1), 1);
     loss = MPE(opts, label, res);
-    display(sprintf('Image index %d: MPE is %f', batch(b), loss));
-
+    title_str = sprintf('Image index %d: MPE is %f', batch(b), loss);
+    display(title_str);
+    draw_pos(test_image, res(end).x*im_size, title_str);
     w = 0;
     while w ~= 1
         w = waitforbuttonpress;

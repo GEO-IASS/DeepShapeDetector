@@ -5,6 +5,9 @@ else
     predictions = res(end).x;
 end
 
+assert(numel(predictions) == numel(labels));
+assert(all(size(predictions) == size(labels)));
+
 delta = predictions - labels;
 total_size = numel(labels);
 non_valid_count = 0;

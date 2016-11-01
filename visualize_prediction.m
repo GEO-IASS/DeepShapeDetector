@@ -1,24 +1,21 @@
 function visualize_prediction(net, batch)
 imdb = load('imdb.mat');
-im_name = imdb.images.name(:,batch);
-im_size = size(imread(im_name{1}), 1);
+[im, label, im_mean] = getBatch(imdb, batch);
 
 batch_size = numel(batch);
 opts.batchSize = 1;
 for b = 1:batch_size
-    test_image = imread(im_name{b});
-    im = single(test_image);
-    for c = 1:3
-        im(:,:,c) = im(:,:,c) - imdb.images.normalization.average(c);
-    end
-    res = vl_simplenn(net, im) ;
-
-    label = single(imdb.images.labels(:, batch(b)));
-    label = reshape(label, 1, 1, size(label, 1), 1);
-    loss = MPE(opts, label, res);
+    res = vl_simplenn(net, im(:, :, :, b)) ;
+    loss = MPE(opts, label(:, :, :, b), res);
     title_str = sprintf('Image index %d: MPE is %f', batch(b), loss);
     display(title_str);
-    draw_pos(test_image, res(end).x*im_size, title_str);
+    
+    test_image = im(:, :, :, b);
+    for c=1:3
+        test_image(:, :, c) = test_image(:, :, c) + im_mean(c,b);
+    end
+    test_image = uint8(test_image);
+    draw_pos(test_image, res(end).x*imdb.meta.image_size, title_str);
     w = 0;
     while w ~= 1
         w = waitforbuttonpress;

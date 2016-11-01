@@ -8,11 +8,11 @@ imdb = load('imdb.mat') ;
 net = initialize_maxnet() ;
 
 % Train
-lr = logspace(-1, -6, 300);
+lr = logspace(0, -5, 418);
 
 trainOpts.expDir = 'output' ;
 trainOpts.gpus = gpus ;
-trainOpts.batchSize = 32 ;
+trainOpts.batchSize = 128 ;
 trainOpts.learningRate = lr ;
 trainOpts.weightDecay = 0.0005;
 trainOpts.momentum = 0.9 ;

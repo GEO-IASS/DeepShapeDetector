@@ -1,6 +1,5 @@
 function test_getBatch(batch)
 imdb = load('imdb.mat');
-display(batch)
 [im, label, im_mean] = getBatch(imdb, batch);
 
 im_size = size(im, 1);
